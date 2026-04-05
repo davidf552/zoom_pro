@@ -1,0 +1,20 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+.bruin.yml
+
+# Credentials and secrets
+**/*video-490706-6bd43a071f7e*.json
+*.tfstate
+*.tfstate.backup
+logs/runs
+logs/*.log
+*.py[cod]
