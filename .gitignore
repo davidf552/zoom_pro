@@ -19,3 +19,4 @@ logs/runs
 logs/*.log
 *.py[cod]
 terraform/
+.terraform*
