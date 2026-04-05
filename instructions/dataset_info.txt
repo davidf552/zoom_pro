@@ -1,0 +1,30 @@
+About Dataset
+A comprehensive collection of 64,000+ video games across 40 years of gaming history. The dataset provides a thorough look at how different genres, platforms, and publishers have performed globally and regionally. This dataset bridges the gap between classic retro gaming and the modern era, featuring global sales, regional breakdowns (NA, JP, PAL), and critic evaluations. Perfect for time-series forecasting, market analysis, and building recommendation engines.
+
+The dataset contains the following features:
+
+title: Game title
+
+console: The game was released for the console
+
+genre: Genre of the game
+
+publisher: Publisher of the game
+
+developer: Developer of the game
+
+critic_score: Metacritic score (out of 10)
+
+total_sales: Global sales of copies in millions
+
+na_sales: North American sales of copies in millions
+
+jp_sales: Japanese sales of copies in millions
+
+pal_sales: European & African sales of copies in millions
+
+other_sales: Rest of world sales of copies in millions
+
+release_date: Date the game was released on
+
+last_update: Date the data was last updated

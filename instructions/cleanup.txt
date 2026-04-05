@@ -1,0 +1,88 @@
+## environment cleanup
+
+Option 1 (Recommended): Edit the file manually
+
+Open .bashrc in a text editor:
+
+In Git Bash:
+    nano ~/.bashrc
+
+or if you use VS Code:
+
+    code ~/.bashrc
+Then:
+
+    Find this line:
+
+        export GOOGLE_APPLICATION_CREDENTIALS="/c/Users/yourname/.gcp/my-terraform-sa.json"
+
+    Delete it (or comment it out):
+
+        # export GOOGLE_APPLICATION_CREDENTIALS="..."
+
+Save:
+
+    In nano:
+
+        Ctrl + O → Enter
+
+        Ctrl + X
+
+✅ Apply the change
+
+Run:
+
+    source ~/.bashrc
+✅ Verify it's gone
+        echo $GOOGLE_APPLICATION_CREDENTIALS
+
+👉 Should return nothing
+
+⚡ Option 2: Remove it with a command
+
+If you prefer one-liner removal:
+
+    sed -i '/GOOGLE_APPLICATION_CREDENTIALS/d' ~/.bashrc
+
+👉 This deletes any line containing that variable.
+
+Then reload:
+
+    source ~/.bashrc
+
+🧹 Also remove it from current session
+
+Even after removing from .bashrc, it may still exist right now.
+
+    Unset it:
+
+        unset GOOGLE_APPLICATION_CREDENTIALS
+
+    Check again:
+
+        echo $GOOGLE_APPLICATION_CREDENTIALS
+
+
+⚠️ Common gotcha
+
+If it still shows up:
+
+👉 It might also be set in:
+
+~/.bash_profile
+
+~/.profile
+
+You can check:
+
+cat ~/.bash_profile
+cat ~/.profile
+👍 Clean checklist
+
+ Removed line from .bashrc
+
+ Ran source ~/.bashrc
+
+ Ran unset GOOGLE_APPLICATION_CREDENTIALS
+
+ Verified with echo

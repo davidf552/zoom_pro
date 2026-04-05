@@ -1,0 +1,15 @@
+/* @bruin
+name: time_table
+description: This asset creates a table in BigQuery
+             that calculates the total sales by release year.
+type: bq.sql
+
+depends: 
+   - table_warehouse
+
+@bruin */
+
+CREATE OR REPLACE TABLE `video-490706.game_sales.Year_sales` AS
+SELECT release_year, ROUND(SUM(total_sales), 2) AS year_sales
+FROM `video-490706.game_sales.Videogame_sales`
+GROUP BY release_year ORDER BY release_year;

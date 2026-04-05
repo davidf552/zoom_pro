@@ -1,0 +1,3 @@
+change year column to int.
+df['release_year'] = df['release_year'].astype(int)
+TOTAL RECORDS: 18832

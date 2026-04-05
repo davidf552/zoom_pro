@@ -1,0 +1,88 @@
+SQL asset that computes metrics:
+
+/* @bruin
+name: analytics.monthly_sales_query
+type: bq.query
+materialization:
+  type: view
+depends:
+  - raw.sales_data
+@bruin */
+
+SELECT
+  month,
+  SUM(amount) AS total_sales
+FROM raw.sales_data
+GROUP BY month;
+
+
+Dashboard asset that references it:
+name: analytics.monthly_sales_dashboard
+type: looker_studio
+depends:
+  - analytics.monthly_sales_query
+owner:
+  - [email protected]
+
+
+Build a dashboard in Looker Studio (connected to your warehouse)
+Use the view analytics.monthly_sales_query as your data source.
+
+Run your pipeline:
+
+bruin run
+
+Important Notes
+Bruin dashboards don’t replace your BI tool; they link dashboards into your pipeline.
+The dashboard itself is still created and designed inside tools like Looker Studio, Metabase, etc.
+Bruin’s role is to track, schedule, and potentially refresh these dashboards alongside your data pipeline.
+
+
+PROMPT
+how do i make a dashboard using a query from bruin? https://getbruin.com/docs/bruin/assets/dashboard.html
+
+-------------------------------
+and once i have done that dashboard, using a dashboard asset will connect it to bruin?
+
+Exactly — once you’ve built your dashboard in a BI tool like Power BI, you can use a dashboard asset in Bruin to connect it to your pipeline. This doesn’t recreate the dashboard; it links Bruin to the dashboard so it’s tracked, scheduled, and connected to your data lineage.
+
+Here’s how it works:
+
+
+
+1. Your dashboard already exists
+Example: Power BI Desktop report connected to your BigQuery view games_view.
+This dashboard contains all your charts, slicers, and visuals.
+🔹 2. Create a dashboard asset in Bruin
+
+Bruin doesn’t build dashboards itself — it just references them. You define an asset that represents your dashboard and declares which data it depends on. Example:
+
+name: analytics.video_games_dashboard
+type: powerbi
+description: "Power BI dashboard showing video game sales metrics"
+depends:
+  - analytics.games_view  # This is the BigQuery view your dashboard uses
+owner:
+  - [email protected]
+tags:
+  - dashboard
+  - powerbi
+name → unique identifier in Bruin
+type → your BI tool (powerbi)
+depends → links the dashboard to the SQL/BigQuery asset it relies on
+owner → who “owns” this dashboard
+tags → optional metadata
+🔹 3. How Bruin uses this
+Tracks lineage: knows the dashboard depends on games_view
+Can schedule refreshes for some BI tools (Power BI Service, Tableau, etc.)
+Documents dashboards as part of your pipeline so team members know what reports exist and what data they rely on
+🔹 4. What Bruin doesn’t do
+It doesn’t create or edit Power BI dashboards
+The dashboard itself remains in Power BI Desktop or Power BI Service
+Bruin is for tracking, scheduling, and governance, not rendering visuals
+
+✅ Bottom line
+
+Build the dashboard in Power BI (or other BI tool).
+Create a dashboard asset in Bruin and link it to the SQL/BigQuery asset(s) it uses.
+Bruin now knows the dashboard exists, what it depends on, and can include it in your pipeline/lineage.

@@ -1,0 +1,107 @@
+#### ACTIVATE TERRAFORM
+
+export PATH=$PATH:$(pwd)/terraform
+terraform version
+terraform init
+terraform plan -var="project_id=video-490706"
+terraform apply -var="project_id=video-490706"
+terraform destroy -var="project_id=video-490706"
+
+
+##### GOOGLE SDK
+export PATH=$PATH:"/c/Users/dfrei/AppData/Local/Google/Cloud\SDK/google-cloud-sdk/bin"
+C:\Users\dfrei\AppData\Local\Google\Cloud SDK\google-cloud-sdk
+
+
+##### GOOGLE CLOUD PROJECT INFO #####
+project id: video-490706
+project name: video
+project number: 346987532071
+
+gcloud auth activate-service-account --key-file="$GOOGLE_APPLICATION_CREDENTIALS"
+gcloud config set project video-490706
+
+
+#### ENVIRONMENT VARIABLE
+# TEMP
+export GOOGLE_APPLICATION_CREDENTIALS="video-490706-6bd43a071f7e.json"
+
+# PERMANENT
+echo 'export GOOGLE_APPLICATION_CREDENTIALS="/c/Users/yourname/.gcp/my-terraform-sa.json"' >> ~/.bashrc
+source ~/.bashrc
+
+echo 'export GOOGLE_APPLICATION_CREDENTIALS="video-490706-6bd43a071f7e.json"' >> ~/.bashrc
+source ~/.bashrc
+
+
+echo $GOOGLE_APPLICATION_CREDENTIALS
+
+
+
+
+##### TERRAFORM TEMP BLOCKS ####
+
+resource "google_bigquery_dataset" "dataset" {
+  dataset_id = "terraform_demo_dataset"
+  location   = "us-east4"
+}
+
+
+
+###### PYTHON ORIGINAL DEMO ASSET #####
+"""@bruin
+name: my_python_asset
+@bruin"""
+
+print('hello world')
+
+########################################
+
+
+#### PACKAGES INSTALLED UV
+uv add kagglehub
+uv add google-cloud-storage
+
+
+
+###### GPT PROMPT
+i want to get a csv file from a google cloud bucket 
+into bigquery using bruin: https://getbruin.com/docs/bruin/assets/ingestr.html
+
+###### LAKE TO WAREHOUSE DRAFT ASSET
+name: raw.my_csv_data
+type: ingestr
+connection: my-bq   # destination
+
+parameters:
+  source_connection: my-gcs
+  source_table: "my-bucket/path/to/file.csv"
+  destination: bigquery
+
+  # optional but useful
+  loader_file_format: csv
+  incremental_strategy: replace   # or append
+
+
+###### SQL APPROACH 
+
+#This eliminates duplicate data
+CREATE OR REPLACE TABLE `video-490706.game_sales.Videogame_sales`
+(
+  title STRING,
+  console STRING,
+  genre STRING,
+  publisher STRING,
+  developer STRING,
+  critic_score FLOAT64,
+  total_sales FLOAT64,
+  release_year INT64
+)
+CLUSTER BY genre, console;
+
+LOAD DATA INTO `video-490706.game_sales.Videogame_sales`
+FROM FILES (
+  format = 'CSV',
+  uris = ['gs://bruin-test-001/Video_Games_Sales_Cleaned.csv'],
+  skip_leading_rows = 1
+);
