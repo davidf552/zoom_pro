@@ -18,4 +18,4 @@ wheels/
 logs/runs
 logs/*.log
 *.py[cod]
-*.terraform.exe
+terraform/
