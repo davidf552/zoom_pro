@@ -3,7 +3,12 @@ name: datalake_ingestion
 description: Ingest video game sales data from Kaggle into a data lake (GCS) 
              using python.
 @bruin"""
+import os
 
+for k, v in os.environ.items():
+    if "GCP" in k or "GOOGLE" in k or "CLOUD" in k:
+        print(f"{k}={v[:100]}")  # truncate to avoid huge output
+        
 import kagglehub
 from kagglehub import KaggleDatasetAdapter
 from google.cloud import storage
