@@ -4,9 +4,7 @@ description: Ingest video game sales data from Kaggle into a data lake (GCS)
              using python.
 @bruin"""
 import os
-
-for k in os.environ:
-    print(k)
+print(os.environ["BRUIN_VARS"])
 
 '''import kagglehub
 from kagglehub import KaggleDatasetAdapter
