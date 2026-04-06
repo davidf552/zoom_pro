@@ -5,11 +5,10 @@ description: Ingest video game sales data from Kaggle into a data lake (GCS)
 @bruin"""
 import os
 
-for k, v in os.environ.items():
-    if "GCP" in k or "GOOGLE" in k or "CLOUD" in k:
-        print(f"{k}={v[:100]}")  # truncate to avoid huge output
-        
-import kagglehub
+for k in os.environ:
+    print(k)
+
+'''import kagglehub
 from kagglehub import KaggleDatasetAdapter
 from google.cloud import storage
 
@@ -51,3 +50,4 @@ upload_csv(
     source_file_name="Video_Games_Sales_Cleaned.csv",
     destination_blob_name="Video_Games_Sales_Cleaned.csv"
 )
+'''
