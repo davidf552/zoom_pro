@@ -3,10 +3,9 @@ name: datalake_ingestion
 description: Ingest video game sales data from Kaggle into a data lake (GCS) 
              using python.
 @bruin"""
-import os
-print(os.environ["BRUIN_VARS"])
 
-'''import kagglehub
+
+import kagglehub
 from kagglehub import KaggleDatasetAdapter
 from google.cloud import storage
 
@@ -48,4 +47,3 @@ upload_csv(
     source_file_name="Video_Games_Sales_Cleaned.csv",
     destination_blob_name="Video_Games_Sales_Cleaned.csv"
 )
-'''
