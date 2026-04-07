@@ -105,3 +105,9 @@ FROM FILES (
   uris = ['gs://bruin-test-001/Video_Games_Sales_Cleaned.csv'],
   skip_leading_rows = 1
 );
+
+
+
+bruin import database --connection gcp-prod --schema game_sales bruin-pipeline
+bruin query --connection gcp-prod --query "SELECT schema_name FROM INFORMATION_SCHEMA.SCHEMATA"
+

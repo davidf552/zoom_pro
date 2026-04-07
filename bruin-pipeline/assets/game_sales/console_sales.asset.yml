@@ -1,0 +1,17 @@
+name: game_sales.console_sales
+type: bq.source
+description: |-
+  Imported table: game_sales.Console_sales
+  Extracted at: 2026-04-07T07:06:37Z
+  Created at: 2026-03-30T22:05:36Z
+  Last modified: 2026-03-30T22:05:36Z
+  Row count: 39
+  Size: 812 bytes
+
+columns:
+  - name: console
+    type: STRING
+  - name: pct_sales
+    type: FLOAT
+  - name: year_sales
+    type: FLOAT
